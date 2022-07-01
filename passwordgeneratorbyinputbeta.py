@@ -26,7 +26,15 @@ def list_generator(list_of_possible_words,namelist):
             try:
                 length = int(input(f"How many words do you want to combine? "))
                 if length>len(list_of_possible_words):length = len(list_of_possible_words)
-            except:length = len(list_of_possible_words)            
+            except:length = len(list_of_possible_words)             
+            for i in range(length,1,-1):
+                try:
+                    print('Permutation lenght: ',i)
+                    permutation_examples = list(permutations(list_of_possible_words, length))
+                    break
+                except MemoryError as e:
+                    print("Memory Error: ",e,'\nTrying to reduce the permutation lenght.')
+                    permutation_examples = list()
             permutation_examples = list(permutations(list_of_possible_words, length))
             output = [(''.join(_)+'\n').encode() for _ in permutation_examples]
             f.writelines(output)
