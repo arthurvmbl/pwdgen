@@ -31,7 +31,7 @@ def list_generator(list_of_possible_words,namelist):
 if __name__=='__main__':
     namelist = input("Give your list a name: ")
     lista = 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'.split(' ')
-    
+    #
     if list_generator(lista,namelist):
         print("Your list is ready!")
     else:
