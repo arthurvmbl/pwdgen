@@ -1,8 +1,4 @@
-from asyncore import write
-from fileinput import close
 import itertools
-
-
 
 print("""\
     
