@@ -35,8 +35,13 @@ def list_generator(list_of_possible_words,namelist):
                 except MemoryError as e:
                     print("Memory Error: ",e,'\nTrying to reduce the permutation lenght.')
                     permutation_examples = list()
-            permutation_examples = list(permutations(list_of_possible_words, length))
-            output = [(''.join(_)+'\n').encode() for _ in permutation_examples]
+            batch_size = 10000
+            print(f'Batch size: '+str(batch_size)+' and '+str(len(permutation_examples))+' rows'  if batch_size<len(permutation_examples) else 'Batch size: '+str(len(permutation_examples)))
+            last = floor(len(permutation_examples)/batch_size)
+            for i in range(last):
+                output = [(''.join(_)+'\n').encode() for _ in permutation_examples[batch_size*i:batch_size*(i+1)]]
+                f.writelines(output)
+            output = [(''.join(_)+'\n').encode() for _ in permutation_examples[batch_size*last:]]
             f.writelines(output)
         return True
     except:return False
