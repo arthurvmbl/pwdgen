@@ -1,5 +1,14 @@
-import itertools
-
+from itertools import permutations
+def list_generator(list_of_possible_words,namelist):
+    try:
+        with open(namelist + ".txt",mode="wb") as f:
+            list_of_possible_words = list(filter(None,list_of_possible_words))
+            length = int(input(f"How many words do you want to combine? "))
+            permutation_examples = list(permutations(list_of_possible_words, length))
+            output = [(''.join(_)+'\n').encode() for _ in permutation_examples]
+            f.writelines(output)
+        return True
+    except:return False
 print("""\
     
     
@@ -43,15 +52,5 @@ team = input("Team/Sport; ")
 lista = [name, nick, yearbirth, relative1, relative2, relative3, relative4, favoriteword, phone,
              oldphone, id, ss, dobw, pet, job, team]
 
-lista = list(filter(None, lista))
-    
-print(len(lista))
-
-tamain = int(input("How many words do you want to combine? "))
-
-s = lista
-t = list(itertools.permutations(s, tamain))
-for i in range(0, len(t)):
-        print(''.join(t[i]), file=f)
-    
+list_generator(lista,namelist)    
 print("Your list is ready!")
