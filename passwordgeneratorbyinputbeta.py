@@ -18,11 +18,15 @@ by arthurvmbl & HenriqueMenezesN
 
     """)
 from itertools import permutations
+from math import floor
 def list_generator(list_of_possible_words,namelist):
     try:
         with open(namelist + ".txt",mode="wb") as f:
             list_of_possible_words = list(filter(None,list_of_possible_words))
-            length = int(input(f"How many words do you want to combine? "))
+            try:
+                length = int(input(f"How many words do you want to combine? "))
+                if length>len(list_of_possible_words):length = len(list_of_possible_words)
+            except:length = len(list_of_possible_words)            
             permutation_examples = list(permutations(list_of_possible_words, length))
             output = [(''.join(_)+'\n').encode() for _ in permutation_examples]
             f.writelines(output)
